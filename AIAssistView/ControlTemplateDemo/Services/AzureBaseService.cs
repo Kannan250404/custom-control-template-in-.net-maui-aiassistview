@@ -154,10 +154,11 @@ namespace ControlTemplate
         /// </summary>
         private async void ShowAlertAsync()
         {
-            if (Application.Current?.MainPage != null && !IsCredentialValid)
+            var page = Application.Current?.Windows.FirstOrDefault()?.Page;
+            if (page != null && !IsCredentialValid)
             {
                 isAlreadyValidated = true;
-                await Application.Current.MainPage.DisplayAlert("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials. You can also continue with the offline data.", "OK");
+                await page.DisplayAlertAsync("Alert", "The Azure API key or endpoint is missing or incorrect. Please verify your credentials. You can also continue with the offline data.", "OK");
             }
         }
 
